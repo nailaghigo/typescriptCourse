@@ -10,9 +10,9 @@ interface Props {
 const ListItem: React.FC<Props> = ({id, name, email}) => {
     return (
       <View style={styles.item}>
-        <Text style={styles.data}>ID: {id}</Text>
-        <Text style={styles.data}>Name: {name}</Text>
-        <Text style={styles.data}>Email: {email}</Text>
+        <Text style={styles.label}>ID: <Text style={styles.data}>{id}</Text></Text>
+        <Text style={styles.label}>Name: <Text style={styles.data}>{name}</Text></Text>
+        <Text style={styles.label}>Email: <Text style={styles.data}>{email}</Text></Text>
       </View>
     )
 };
@@ -23,11 +23,18 @@ const styles = StyleSheet.create({
     marginRight: 15,
     marginTop: 5,
     padding: 10,
-    backgroundColor: '#C2D09C'
+    borderColor: '#263544',
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    backgroundColor: '#ffffff'
+  },
+  label: {
+    fontWeight: '600',
   },
   data: {
+    fontWeight: '200',
     fontSize: 15,
-    color: '#FFF'
+    color: '#263544',
+    padding: 2
   }
 });
 

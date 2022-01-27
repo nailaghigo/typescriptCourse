@@ -20,7 +20,7 @@ const App = () => {
   const onRefresh = () => {
     setLoading(true);
     fetch('https://jsonplaceholder.typicode.com/users')
-    .then( async (response) => await response.json())
+    .then((response) => response.json())
     .then((response) => {
       setClients(response)
       setLoading(false)
@@ -33,7 +33,7 @@ const App = () => {
   }, [])
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
         <View style={styles.header}>
           <Text style={styles.headerTitle}>Radium Med</Text>
@@ -48,7 +48,7 @@ const App = () => {
             <ListItem
               id={item.id}
               name={item.name}
-              email={item.name}
+              email={item.email}
             />
           )}
         />
@@ -58,13 +58,17 @@ const App = () => {
 };
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1
+  },
   container: {
-    alignItems: 'stretch'
+    alignItems: 'stretch',
+    flex: 1
   },
   header: {
     justifyContent: 'center',
     alignItems: 'center',
-    height: 70,
+    height: 60,
     backgroundColor: '#263544'
   },
   headerTitle: {
