@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Pressable } from 'react-native';
+import {View, Text, StyleSheet, Pressable} from 'react-native';
 
 interface Props {
   id: number;
@@ -10,57 +10,55 @@ interface Props {
 }
 
 const ListItem: React.FC<Props> = ({id, name, email, onUpdate, onDelete}) => {
-    return (
-      <View style={styles.itemWrapper}>
-        <View style={styles.item}>
-          <Text style={styles.label}>ID: <Text style={styles.data}>{id}</Text></Text>
-          <Text style={styles.label}>Name: <Text style={styles.data}>{name}</Text></Text>
-          <Text style={styles.label}>Email: <Text style={styles.data}>{email}</Text></Text>
-        </View>
-        <View style={styles.containerButtons}>
-          <Pressable
-            onPress={() => onUpdate(id)}
-            style={({ pressed }) => [
-              {
-                borderBottomColor: pressed
-                  ? '#202c39'
-                  : '#EB9960',
-              },
-              styles.buttonUpdate
-            ]}>
-            {() => (
-              <Text>Update</Text>
-            )}
-          </Pressable>
-          <Pressable
-            onPress={() => onDelete(id)}
-            style={({ pressed }) => [
-              {
-                backgroundColor: pressed
-                  ? '#EFA76B'
-                  : '#EB9960',
-              },
-              styles.buttonDelete
-            ]}>
-            {() => (
-              <Text>Delete</Text>
-            )}
-          </Pressable>
-        </View>
+  return (
+    <View style={styles.itemWrapper}>
+      <View style={styles.item}>
+        <Text style={styles.label}>
+          ID: <Text style={styles.data}>{id}</Text>
+        </Text>
+        <Text style={styles.label}>
+          Name: <Text style={styles.data}>{name}</Text>
+        </Text>
+        <Text style={styles.label}>
+          Email: <Text style={styles.data}>{email}</Text>
+        </Text>
       </View>
-    )
+      <View style={styles.containerButtons}>
+        <Pressable
+          onPress={() => onUpdate(id)}
+          style={({pressed}) => [
+            {
+              borderBottomColor: pressed ? '#202c39' : '#EB9960',
+            },
+            styles.buttonUpdate,
+          ]}>
+          {() => <Text>Update</Text>}
+        </Pressable>
+        <Pressable
+          onPress={() => onDelete(id)}
+          style={({pressed}) => [
+            {
+              backgroundColor: pressed ? '#EFA76B' : '#EB9960',
+            },
+            styles.buttonDelete,
+          ]}>
+          {() => <Text>Delete</Text>}
+        </Pressable>
+      </View>
+    </View>
+  );
 };
 
 const styles = StyleSheet.create({
   itemWrapper: {
     display: 'flex',
     justifyContent: 'space-between',
-    flexDirection:'row',
-    marginLeft: 15,
-    marginRight: 15,
+    flexDirection: 'row',
+    marginLeft: 8,
+    marginRight: 8,
     marginTop: 5,
     borderBottomWidth: StyleSheet.hairlineWidth,
-    backgroundColor: '#ffffff'
+    backgroundColor: '#ffffff',
   },
   item: {
     borderColor: '#263544',
@@ -71,9 +69,9 @@ const styles = StyleSheet.create({
   },
   data: {
     fontWeight: '200',
-    fontSize: 15,
+    fontSize: 14,
     color: '#263544',
-    padding: 2
+    // padding: 2,
   },
   //Buttons delete and update
   containerButtons: {
@@ -93,7 +91,6 @@ const styles = StyleSheet.create({
     padding: 6,
     borderRadius: 3,
     color: 'white',
-
   },
 });
 

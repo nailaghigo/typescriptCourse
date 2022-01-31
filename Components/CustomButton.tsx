@@ -1,27 +1,18 @@
 import React from 'react';
-import { Text, StyleSheet, Pressable} from 'react-native';
+import {Text, StyleSheet, Pressable} from 'react-native';
 
 interface Props {
-    onPress: any,
-    text: string,
-    bgColor: string,
-    fgColor: string
-  }
-const CustomButton : React.FC<Props> = ({onPress, text, bgColor, fgColor}) => {
+  onPress: any;
+  text: string;
+  bgColor: string;
+  fgColor: string;
+}
+const CustomButton: React.FC<Props> = ({onPress, text, bgColor, fgColor}) => {
   return (
     <Pressable
       onPress={onPress}
-      style={[
-        styles.container,
-        bgColor ? {backgroundColor: bgColor} : {},
-      ]}>
-      <Text
-        style={[
-          styles.text,
-          fgColor ? {color: fgColor} : {},
-        ]}>
-        {text}
-      </Text>
+      style={[styles.container, bgColor ? {backgroundColor: bgColor} : {}]}>
+      <Text style={[styles.text, fgColor ? {color: fgColor} : {}]}>{text}</Text>
     </Pressable>
   );
 };
