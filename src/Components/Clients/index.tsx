@@ -1,11 +1,14 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import {StyleSheet, Text, View, FlatList, Pressable} from 'react-native';
-import ListItem from '../ListItem';
-import clientType from '../../helper/clientType';
-import {useForm} from 'react-hook-form';
+import ListItem from '../../Components/Shared/ListItem';
 
-const Clients = ({displayAddClient, onUpdateClient, onDeleteClient, clients, isLoading}) => {
-
+const Clients = ({
+  displayAddClient,
+  onUpdateClient,
+  onDeleteClient,
+  clients,
+  isLoading,
+}) => {
   return (
     <FlatList
       ListHeaderComponent={

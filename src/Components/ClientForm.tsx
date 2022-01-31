@@ -1,8 +1,7 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import {StyleSheet, Text, View, Pressable} from 'react-native';
 import {useForm, SubmitHandler} from 'react-hook-form';
-import CustomInput from '../../CustomInput';
-import clientType from '../../../helper/clientType';
+import CustomInput from '../Components/Shared/CustomInput';
 
 interface IFormInputs {
   name: string;
@@ -12,7 +11,7 @@ interface IFormInputs {
 const EMAIL_REGEX =
   /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
-const ClientForm = ({ onSubmit: onSubmitProp, client, onClose }) => {
+const ClientForm = ({onSubmit: onSubmitProp, client, onClose}) => {
   const {
     control: control2,
     handleSubmit: handleSubmit2,

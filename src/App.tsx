@@ -1,11 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
-// import ListItem from './Components/ListItem';
-// import clientType from './helper/clientType';
 import FlipperAsyncStorage from 'rn-flipper-async-storage-advanced';
-import LogIn from './Components/LogIn';
-import ClientForm from './Components/Clients/Form/ClientForm';
+import LogIn from './Components/Auth/Login';
+import ClientForm from './Components/ClientForm';
 import Clients from './Components/Clients';
+import clientType from './helper/clientType';
 import Toast from 'react-native-simple-toast';
 // import { NavigationContainer } from '@react-navigation/native';
 
@@ -26,18 +25,18 @@ const App = () => {
   };
 
   const onDeleteClient = (id: number) => {
-    setClients(prevClient => {;
-      Toast.show('Client deleted successfully.')
+    setClients(prevClient => {
+      Toast.show('Client deleted successfully.');
       return prevClient.filter(client => client.id !== id);
-    })
-  }
+    });
+  };
 
   const displayAddClientHandle = () => {
-    setDisplayAdd(true)
-  }
+    setDisplayAdd(true);
+  };
 
   const updatingClient = clients.find(c => c.id === updatingClientId);
-  
+
   const onRefresh = () => {
     setLoading(true);
     fetch('https://jsonplaceholder.typicode.com/users')
@@ -60,7 +59,7 @@ const App = () => {
     setUpdatingClientId();
   };
 
-  const handleSubmit = (client) => {
+  const handleSubmit = client => {
     if (updatingClient) {
       setClients(
         clients.map(c => {
@@ -82,7 +81,7 @@ const App = () => {
         },
       ]);
     }
-  }
+  };
 
   return (
     // <NavigationContainer>
@@ -94,14 +93,20 @@ const App = () => {
         </View>
         {isLogged ? (
           <>
-            {(displayAdd || updatingClient) && <ClientForm onSubmit={handleSubmit} client={updatingClient} onClose={onClose}/>}
+            {(displayAdd || updatingClient) && (
+              <ClientForm
+                onSubmit={handleSubmit}
+                client={updatingClient}
+                onClose={onClose}
+              />
+            )}
             <Clients
               displayAddClient={displayAddClientHandle}
               onDeleteClient={onDeleteClient}
               onUpdateClient={onUpdateClient}
               clients={clients}
               isLoading={isLoading}
-            /> 
+            />
           </>
         ) : (
           <View>
