@@ -11,7 +11,7 @@ interface IFormInputs {
 const EMAIL_REGEX =
   /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
-const ClientForm = ({onSubmit: onSubmitProp, client, onClose}) => {
+const ClientForm = ({route}) => {
   const {
     control: control2,
     handleSubmit: handleSubmit2,
@@ -20,17 +20,18 @@ const ClientForm = ({onSubmit: onSubmitProp, client, onClose}) => {
   } = useForm<IFormInputs>();
 
   const onSubmit: SubmitHandler<IFormInputs> = data => {
-    onSubmitProp({
-      ...client,
+    route.params.onSubmit({
+      ...route.params.client,
       ...data,
     });
-    onClose();
+    route.params.onClose();
   };
 
   useEffect(() => {
-    setValue('name', client?.name);
-    setValue('email', client?.email);
-  }, [client]);
+    console.log('route', route);
+    setValue('name', route.params.client?.name);
+    setValue('email', route.params.client?.email);
+  }, [route, setValue]);
 
   return (
     <View>
@@ -69,7 +70,7 @@ const ClientForm = ({onSubmit: onSubmitProp, client, onClose}) => {
         <Text>Save</Text>
       </Pressable>
       <Pressable
-        onPress={onClose}
+        onPress={route.params.onClose}
         style={({pressed}) => [
           {
             backgroundColor: pressed ? '#EFA76B' : '#EB9960',
