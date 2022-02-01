@@ -1,15 +1,17 @@
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, Text, View, FlatList, Pressable} from 'react-native';
-import clientType from '../../helper/clientType';
+import clientType, {RootStackParamList} from '../../helper/clientType';
 import ListItem from '../../Components/Shared/ListItem';
 import Toast from 'react-native-simple-toast';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
-const ClientList = ({navigation}: NativeStackScreenProps<any>) => {
+type Props = NativeStackScreenProps<RootStackParamList, 'ClientsList'>;
+
+const ClientList: React.FC<Props> = ({navigation}) => {
   const [clients, setClients] = useState<clientType[]>([]);
   const [isLoading, setLoading] = useState(false);
 
-  const updateClient = client => {
+  const updateClient = (client: clientType) => {
     setClients(
       clients.map(c => {
         if (c.id === client.id) {
@@ -21,11 +23,11 @@ const ClientList = ({navigation}: NativeStackScreenProps<any>) => {
       }),
     );
   };
-  const createClient = client => {
+  const createClient = (client: clientType) => {
     setClients([
       ...clients,
       {
-        id: clients.length + 1,
+        id: Math.max(...clients.map(o => o.id), 0) + 1,
         name: client.name,
         email: client.email,
       },
@@ -36,11 +38,13 @@ const ClientList = ({navigation}: NativeStackScreenProps<any>) => {
   const onCreateClient = () => {
     navigation.navigate('ClientForm', {
       onSubmit: createClient,
-      onClose: () => navigation.navigate('ClientsList'),
+      onClose: () => {
+        navigation.navigate('ClientsList');
+      },
     });
   };
 
-  const onUpdateClient = (clientId: string) => {
+  const onUpdateClient = (clientId: number) => {
     navigation.navigate('ClientForm', {
       clientId,
       onSubmit: updateClient,
