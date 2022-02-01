@@ -11,6 +11,7 @@
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
+		5373F29327A9637D0009E176 /* Fonts in Resources */ = {isa = PBXBuildFile; fileRef = 5373F29227A9637D0009E176 /* Fonts */; };
 		6172F2D35A4C3AA820D92908 /* libPods-typsecriptNativeCourse.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6423831EA8574132BED9D8CC /* libPods-typsecriptNativeCourse.a */; };
 		7EF68E3733C33B6898317E18 /* libPods-typsecriptNativeCourse-typsecriptNativeCourseTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ABFE59519B596E51CEFDCCC0 /* libPods-typsecriptNativeCourse-typsecriptNativeCourseTests.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
@@ -37,6 +38,7 @@
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = typsecriptNativeCourse/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = typsecriptNativeCourse/main.m; sourceTree = "<group>"; };
 		1D0AE47A65C8663E3B452821 /* Pods-typsecriptNativeCourse-typsecriptNativeCourseTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-typsecriptNativeCourse-typsecriptNativeCourseTests.release.xcconfig"; path = "Target Support Files/Pods-typsecriptNativeCourse-typsecriptNativeCourseTests/Pods-typsecriptNativeCourse-typsecriptNativeCourseTests.release.xcconfig"; sourceTree = "<group>"; };
+		5373F29227A9637D0009E176 /* Fonts */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Fonts; path = "../node_modules/react-native-vector-icons/Fonts"; sourceTree = "<group>"; };
 		6423831EA8574132BED9D8CC /* libPods-typsecriptNativeCourse.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-typsecriptNativeCourse.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C97AB639B58BBB4B15BBE30 /* Pods-typsecriptNativeCourse-typsecriptNativeCourseTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-typsecriptNativeCourse-typsecriptNativeCourseTests.debug.xcconfig"; path = "Target Support Files/Pods-typsecriptNativeCourse-typsecriptNativeCourseTests/Pods-typsecriptNativeCourse-typsecriptNativeCourseTests.debug.xcconfig"; sourceTree = "<group>"; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = typsecriptNativeCourse/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 		13B07FAE1A68108700A75B9A /* typsecriptNativeCourse */ = {
 			isa = PBXGroup;
 			children = (
+				5373F29227A9637D0009E176 /* Fonts */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -145,7 +148,6 @@
 				6C97AB639B58BBB4B15BBE30 /* Pods-typsecriptNativeCourse-typsecriptNativeCourseTests.debug.xcconfig */,
 				1D0AE47A65C8663E3B452821 /* Pods-typsecriptNativeCourse-typsecriptNativeCourseTests.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -243,6 +245,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5373F29327A9637D0009E176 /* Fonts in Resources */,
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 			);

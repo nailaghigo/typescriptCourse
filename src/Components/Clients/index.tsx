@@ -7,51 +7,45 @@ import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
 const ClientList = ({navigation}: NativeStackScreenProps<any>) => {
   const [clients, setClients] = useState<clientType[]>([]);
-  const [updatingClientId, setUpdatingClientId] = useState<
-    string | undefined
-  >();
   const [isLoading, setLoading] = useState(false);
-  // const [displayAdd, setDisplayAdd] = useState(false);
 
-  // const displayAddClientHandle = () => {
-  //   setDisplayAdd(true);
-  // };
+  const updateClient = client => {
+    setClients(
+      clients.map(c => {
+        if (c.id === client.id) {
+          c.name = client.name;
+          c.email = client.email;
+        }
 
-  const onClose = () => {
-    // setDisplayAdd(false);
-    setUpdatingClientId(undefined);
+        return c;
+      }),
+    );
+  };
+  const createClient = client => {
+    setClients([
+      ...clients,
+      {
+        id: clients.length + 1,
+        name: client.name,
+        email: client.email,
+      },
+    ]);
+    navigation.navigate('ClientsList');
   };
 
-  const handleSubmit = client => {
-    if (updatingClient) {
-      setClients(
-        clients.map(c => {
-          if (c.id === client.id) {
-            c.name = client.name;
-            c.email = client.email;
-          }
-
-          return c;
-        }),
-      );
-    } else {
-      setClients([
-        ...clients,
-        {
-          id: clients.length + 1,
-          name: client.name,
-          email: client.email,
-        },
-      ]);
-    }
+  const onCreateClient = () => {
+    navigation.navigate('ClientForm', {
+      onSubmit: createClient,
+      onClose: () => navigation.navigate('ClientsList'),
+    });
   };
 
   const onUpdateClient = (clientId: string) => {
     navigation.navigate('ClientForm', {
       clientId,
-      onSubmit: handleSubmit,
+      onSubmit: updateClient,
       client: clients.find(c => c.id.toString() === clientId?.toString()),
-      onClose: onClose,
+      onClose: () => navigation.navigate('ClientsList'),
     });
   };
 
@@ -89,7 +83,7 @@ const ClientList = ({navigation}: NativeStackScreenProps<any>) => {
           <View>
             <Text style={styles.title}>Clients</Text>
             <Pressable
-              // onPress={displayAddClient}
+              onPress={onCreateClient}
               style={({pressed}) => [
                 {
                   backgroundColor: pressed ? '#EFA76B' : '#EB9960',

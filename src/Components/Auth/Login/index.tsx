@@ -21,7 +21,11 @@ const user1 = {
 const EMAIL_REGEX =
   /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
-const LogIn = () => {
+type LoginProps = {
+  handleLogin: () => void;
+};
+
+const LogIn = ({handleLogin}: LoginProps) => {
   // const [isLogged, setLogged] = useState(false);
 
   const {
@@ -43,6 +47,7 @@ const LogIn = () => {
       return Toast.show('Invalid password, try again.');
     }
     storeData(data);
+    handleLogin();
     // setLogged(true);
   };
 
