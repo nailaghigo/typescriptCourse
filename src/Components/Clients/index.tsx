@@ -1,15 +1,18 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState, useContext} from 'react';
 import {StyleSheet, Text, View, FlatList, Pressable} from 'react-native';
 import clientType, {RootStackParamList} from '../../helper/clientType';
 import ListItem from '../../Components/Shared/ListItem';
 import Toast from 'react-native-simple-toast';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {AppPermissionsContext} from '../../context';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'ClientsList'>;
 
 const ClientList: React.FC<Props> = ({navigation}) => {
   const [clients, setClients] = useState<clientType[]>([]);
   const [isLoading, setLoading] = useState(false);
+
+  const clientContextProvider = useContext(AppPermissionsContext);
 
   const updateClient = (client: clientType) => {
     setClients(
@@ -32,12 +35,15 @@ const ClientList: React.FC<Props> = ({navigation}) => {
         email: client.email,
       },
     ]);
-    navigation.navigate('ClientsList');
   };
 
   const onCreateClient = () => {
     navigation.navigate('ClientForm', {
-      onSubmit: createClient,
+      onSubmit: client => {
+        createClient;
+        createClient(client);
+        navigation.navigate('ClientsList');
+      },
       onClose: () => {
         navigation.navigate('ClientsList');
       },
@@ -60,22 +66,22 @@ const ClientList: React.FC<Props> = ({navigation}) => {
     });
   };
 
-  const onRefresh = () => {
-    setLoading(true);
-    fetch('https://jsonplaceholder.typicode.com/users')
-      .then(response => response.json())
-      .then(response => {
-        setClients(response);
-        setLoading(false);
-      })
-      .catch(error => {
-        error;
-      });
-  };
+  // const onRefresh = () => {
+  //   setLoading(true);
+  //   fetch('https://jsonplaceholder.typicode.com/users')
+  //     .then(response => response.json())
+  //     .then(response => {
+  //       setClients(response);
+  //       setLoading(false);
+  //     })
+  //     .catch(error => {
+  //       error;
+  //     });
+  // };
 
-  useEffect(() => {
-    onRefresh();
-  }, []);
+  // useEffect(() => {
+  //   onRefresh();
+  // }, []);
 
   return (
     <View style={styles.container}>
@@ -99,7 +105,7 @@ const ClientList: React.FC<Props> = ({navigation}) => {
           </View>
         }
         keyExtractor={item => item.id.toString()}
-        data={clients}
+        data={clientContextProvider?.clients}
         refreshing={isLoading}
         renderItem={({item}) => (
           <>
@@ -107,34 +113,12 @@ const ClientList: React.FC<Props> = ({navigation}) => {
               id={item.id}
               name={item.name}
               email={item.email}
-              onUpdate={() => onUpdateClient(item.id.toString())}
+              onUpdate={() => onUpdateClient(item.id)}
               onDelete={() => onDeleteClient(item.id)}
             />
           </>
         )}
       />
-      {/* {isLogged ? (
-        <>
-          {(displayAdd || updatingClient) && (
-            <ClientForm
-              onSubmit={handleSubmit}
-              client={updatingClient}
-              onClose={onClose}
-            />
-          )}
-          <Clients
-            displayAddClient={displayAddClientHandle}
-            onDeleteClient={onDeleteClient}
-            onUpdateClient={onUpdateClient}
-            clients={clients}
-            isLoading={isLoading}
-          />
-        </>
-      ) : (
-        <View>
-          <LogIn />
-        </View>
-      )} */}
     </View>
   );
 };

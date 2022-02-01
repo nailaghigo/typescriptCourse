@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {SafeAreaView, StyleSheet} from 'react-native';
 import FlipperAsyncStorage from 'rn-flipper-async-storage-advanced';
+import ClientContextProvider from './context';
 import Navigator from './routes/navigator';
 
 const App = () => {
@@ -11,10 +12,12 @@ const App = () => {
   };
 
   return (
-    <SafeAreaView style={styles.safeArea}>
-      <FlipperAsyncStorage />
-      <Navigator handleLogin={handleLogin} logged={logged} />
-    </SafeAreaView>
+    <ClientContextProvider>
+      <SafeAreaView style={styles.safeArea}>
+        <FlipperAsyncStorage />
+        <Navigator handleLogin={handleLogin} logged={logged} />
+      </SafeAreaView>
+    </ClientContextProvider>
   );
 };
 
