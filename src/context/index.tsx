@@ -91,6 +91,7 @@ const ClientContextProvider: FC = ({children}) => {
         // updateClient,
         clients,
         loading,
+        getClients,
         deleteClient,
         createClient,
         updateClient,

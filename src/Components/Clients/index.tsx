@@ -45,7 +45,6 @@ const ClientList: React.FC<Props> = ({navigation}) => {
       <FlatList
         ListHeaderComponent={
           <View>
-            <Text style={styles.title}>Clients</Text>
             <Pressable
               onPress={onCreateClient}
               style={({pressed}) => [

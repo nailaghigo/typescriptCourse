@@ -1,5 +1,6 @@
 import React from 'react';
-import {View, Text, StyleSheet, Pressable} from 'react-native';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import AntDesign from 'react-native-vector-icons/AntDesign';
 
 interface Props {
   id: number;
@@ -24,26 +25,20 @@ const ListItem: React.FC<Props> = ({id, name, email, onUpdate, onDelete}) => {
         </Text>
       </View>
       <View style={styles.containerButtons}>
-        <Pressable
+        <TouchableOpacity
           onPress={() => onUpdate(id)}
-          style={({pressed}) => [
-            {
-              borderBottomColor: pressed ? '#202c39' : '#EB9960',
-            },
-            styles.buttonUpdate,
-          ]}>
-          {() => <Text>Update</Text>}
-        </Pressable>
-        <Pressable
+          style={{alignItems: 'center'}}>
+          <View style={{alignItems: 'center', paddingLeft: 10}}>
+            <AntDesign name="edit" size={20} />
+          </View>
+        </TouchableOpacity>
+        <TouchableOpacity
           onPress={() => onDelete(id)}
-          style={({pressed}) => [
-            {
-              backgroundColor: pressed ? '#EFA76B' : '#EB9960',
-            },
-            styles.buttonDelete,
-          ]}>
-          {() => <Text>Delete</Text>}
-        </Pressable>
+          style={{alignItems: 'center'}}>
+          <View style={{alignItems: 'center', paddingLeft: 10}}>
+            <AntDesign name="delete" size={20} />
+          </View>
+        </TouchableOpacity>
       </View>
     </View>
   );

@@ -8,6 +8,8 @@ import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import AntDesign from 'react-native-vector-icons/AntDesign';
+import {Text, TouchableOpacity, View} from 'react-native';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -21,8 +23,29 @@ const Navigator = ({handleLogin, logged}: NavigatorProps) => {
   function ClientsStackScreen() {
     return (
       <Stack.Navigator>
-        <Stack.Screen name="Clients List" component={ClientsList} />
-        <Stack.Screen name="ClientForm" component={ClientForm} />
+        <Stack.Screen
+          name="ClientsList"
+          component={ClientsList}
+          options={{title: 'Clients'}}
+        />
+        <Stack.Screen
+          name="ClientForm"
+          component={ClientForm}
+          options={({route, navigation}) => ({
+            headerLeft: () => (
+              <TouchableOpacity
+                onPress={() => navigation.goBack(null)}
+                style={{paddingRight: 70}}>
+                <View style={{alignItems: 'center', paddingLeft: 10}}>
+                  <AntDesign name="back" size={20} />
+                  <Text>Back</Text>
+                </View>
+              </TouchableOpacity>
+            ),
+            tabBarButton: () => null,
+            title: route.params?.client ? 'Edit Client' : 'Add New Client',
+          })}
+        />
       </Stack.Navigator>
     );
   }

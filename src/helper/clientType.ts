@@ -12,7 +12,7 @@ export type RootStackParamList = {
   ClientForm: {
     clientId?: number;
     // clients: clientType[];
-    client?: clientType | undefined;
+    client?: clientType;
     onSubmit: (client: clientType) => void;
     onClose: () => void;
     // selectedClient: {
@@ -29,6 +29,7 @@ export interface iClientContext {
   deleteClient: (id: number) => void;
   createClient: (client: clientType) => void;
   updateClient: (client: clientType) => void;
+  getClients: () => void;
 }
 
 export default clientType;

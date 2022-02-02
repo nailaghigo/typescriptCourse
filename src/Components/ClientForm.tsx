@@ -2,25 +2,29 @@ import React, {useEffect} from 'react';
 import {StyleSheet, Text, View, Pressable} from 'react-native';
 import {useForm, SubmitHandler} from 'react-hook-form';
 import CustomInput from '../Components/Shared/CustomInput';
+import {NativeStackScreenProps} from '@react-navigation/native-stack';
+import {RootStackParamList} from '../helper/clientType';
 
 interface IFormInputs {
+  id: number;
   name: string;
   email: string;
 }
 
+type Props = NativeStackScreenProps<RootStackParamList, 'ClientForm'>;
+
 const EMAIL_REGEX =
   /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
-const ClientForm = ({route}) => {
+const ClientForm = ({route}: Props) => {
   const {
     control: control2,
     handleSubmit: handleSubmit2,
     setValue,
-    // formState: {errors},
   } = useForm<IFormInputs>();
 
   const onSubmit: SubmitHandler<IFormInputs> = data => {
-    route.params.onSubmit({
+    route?.params?.onSubmit({
       ...route.params.client,
       ...data,
     });
@@ -28,8 +32,8 @@ const ClientForm = ({route}) => {
   };
 
   useEffect(() => {
-    setValue('name', route.params.client?.name);
-    setValue('email', route.params.client?.email);
+    setValue('name', route.params.client?.name || '');
+    setValue('email', route.params.client?.email || '');
   }, [route, setValue]);
 
   return (
