@@ -36,11 +36,7 @@ const Navigator = ({handleLogin, logged}: NavigatorProps) => {
               if (route.name === 'Home') {
                 return (
                   <Ionicons
-                    name={
-                      focused
-                        ? 'ios-information-circle'
-                        : 'ios-information-circle-outline'
-                    }
+                    name={focused ? 'home' : 'home-outline'}
                     size={size}
                     color={color}
                   />
@@ -48,7 +44,7 @@ const Navigator = ({handleLogin, logged}: NavigatorProps) => {
               } else if (route.name === 'Clients') {
                 return (
                   <Ionicons
-                    name={focused ? 'ios-list-box' : 'ios-list'}
+                    name={focused ? 'list' : 'list-outline'}
                     size={size}
                     color={color}
                   />
@@ -60,7 +56,6 @@ const Navigator = ({handleLogin, logged}: NavigatorProps) => {
           })}>
           <Tab.Screen name="Home" component={HomePage} />
           <Tab.Screen name="Clients" component={ClientsStackScreen} />
-          {/* <Tab.Screen name="ClientForm" component={ClientForm} /> */}
         </Tab.Navigator>
       ) : (
         <Stack.Navigator>
