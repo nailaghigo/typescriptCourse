@@ -21,7 +21,7 @@ const Navigator = ({handleLogin, logged}: NavigatorProps) => {
   function ClientsStackScreen() {
     return (
       <Stack.Navigator>
-        <Stack.Screen name="ClientsList" component={ClientsList} />
+        <Stack.Screen name="Clients List" component={ClientsList} />
         <Stack.Screen name="ClientForm" component={ClientForm} />
       </Stack.Navigator>
     );
@@ -36,11 +36,7 @@ const Navigator = ({handleLogin, logged}: NavigatorProps) => {
               if (route.name === 'Home') {
                 return (
                   <Ionicons
-                    name={
-                      focused
-                        ? 'ios-information-circle'
-                        : 'ios-information-circle-outline'
-                    }
+                    name={focused ? 'ion-ios-home' : 'ion-ios-home-outline'}
                     size={size}
                     color={color}
                   />
@@ -60,7 +56,6 @@ const Navigator = ({handleLogin, logged}: NavigatorProps) => {
           })}>
           <Tab.Screen name="Home" component={HomePage} />
           <Tab.Screen name="Clients" component={ClientsStackScreen} />
-          {/* <Tab.Screen name="ClientForm" component={ClientForm} /> */}
         </Tab.Navigator>
       ) : (
         <Stack.Navigator>

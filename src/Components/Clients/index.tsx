@@ -1,47 +1,19 @@
-import React, {useState, useContext} from 'react';
-import {StyleSheet, Text, View, FlatList, Pressable} from 'react-native';
-import clientType, {RootStackParamList} from '../../helper/clientType';
+import React, {useContext} from 'react';
+import {StyleSheet, Text, View, FlatList, TouchableOpacity} from 'react-native';
+import {RootStackParamList} from '../../helper/clientType';
 import ListItem from '../../Components/Shared/ListItem';
-import Toast from 'react-native-simple-toast';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {AppPermissionsContext} from '../../context';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'ClientsList'>;
 
 const ClientList: React.FC<Props> = ({navigation}) => {
-  const [clients, setClients] = useState<clientType[]>([]);
-  const [isLoading, setLoading] = useState(false);
-
   const clientContextProvider = useContext(AppPermissionsContext);
-
-  const updateClient = (client: clientType) => {
-    setClients(
-      clients.map(c => {
-        if (c.id === client.id) {
-          c.name = client.name;
-          c.email = client.email;
-        }
-
-        return c;
-      }),
-    );
-  };
-  const createClient = (client: clientType) => {
-    setClients([
-      ...clients,
-      {
-        id: Math.max(...clients.map(o => o.id), 0) + 1,
-        name: client.name,
-        email: client.email,
-      },
-    ]);
-  };
 
   const onCreateClient = () => {
     navigation.navigate('ClientForm', {
       onSubmit: client => {
-        createClient;
-        createClient(client);
+        clientContextProvider?.createClient(client);
         navigation.navigate('ClientsList');
       },
       onClose: () => {
@@ -53,35 +25,17 @@ const ClientList: React.FC<Props> = ({navigation}) => {
   const onUpdateClient = (clientId: number) => {
     navigation.navigate('ClientForm', {
       clientId,
-      onSubmit: updateClient,
-      client: clients.find(c => c.id.toString() === clientId?.toString()),
+      onSubmit: client => clientContextProvider?.updateClient(client),
+      client: clientContextProvider?.clients?.find(
+        c => c.id.toString() === clientId?.toString(),
+      ),
       onClose: () => navigation.navigate('ClientsList'),
     });
   };
 
   const onDeleteClient = (id: number) => {
-    setClients(prevClient => {
-      Toast.show('Client deleted successfully.');
-      return prevClient.filter(client => client.id !== id);
-    });
+    clientContextProvider?.deleteClient(id);
   };
-
-  // const onRefresh = () => {
-  //   setLoading(true);
-  //   fetch('https://jsonplaceholder.typicode.com/users')
-  //     .then(response => response.json())
-  //     .then(response => {
-  //       setClients(response);
-  //       setLoading(false);
-  //     })
-  //     .catch(error => {
-  //       error;
-  //     });
-  // };
-
-  // useEffect(() => {
-  //   onRefresh();
-  // }, []);
 
   return (
     <View style={styles.container}>
@@ -92,7 +46,7 @@ const ClientList: React.FC<Props> = ({navigation}) => {
         ListHeaderComponent={
           <View>
             <Text style={styles.title}>Clients</Text>
-            <Pressable
+            <TouchableOpacity
               onPress={onCreateClient}
               style={({pressed}) => [
                 {
@@ -101,12 +55,12 @@ const ClientList: React.FC<Props> = ({navigation}) => {
                 styles.buttonCreate,
               ]}>
               {() => <Text>Add New Client</Text>}
-            </Pressable>
+            </TouchableOpacity>
           </View>
         }
         keyExtractor={item => item.id.toString()}
         data={clientContextProvider?.clients}
-        refreshing={isLoading}
+        refreshing={clientContextProvider?.loading}
         renderItem={({item}) => (
           <>
             <ListItem

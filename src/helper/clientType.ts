@@ -26,6 +26,9 @@ export type RootStackParamList = {
 export interface iClientContext {
   clients: clientType[] | null;
   loading: boolean;
+  deleteClient: (id: number) => void;
+  createClient: (client: clientType) => void;
+  updateClient: (client: clientType) => void;
 }
 
 export default clientType;

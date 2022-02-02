@@ -1,6 +1,7 @@
 import React, {FC, useState, useEffect} from 'react';
 import {createContext} from 'react';
 import clientType, {iClientContext} from '../helper/clientType';
+import Toast from 'react-native-simple-toast';
 
 export const AppPermissionsContext = createContext<iClientContext | null>(null);
 
@@ -38,40 +39,61 @@ const ClientContextProvider: FC = ({children}) => {
   useEffect(() => {
     getClients();
   }, []);
-  // const updateClient = (client: clientType) => {
-  //   setClients(
-  //     clients.map(c => {
-  //       if (c.id === client.id) {
-  //         c.name = client.name;
-  //         c.email = client.email;
-  //       }
 
-  //       return c;
-  //     }),
-  //   );
-  // };
-  // const createClient = (client: clientType) => {
-  //   setClients([
-  //     ...clients,
-  //     {
-  //       id: Math.max(...clients.map(o => o.id), 0) + 1,
-  //       name: client.name,
-  //       email: client.email,
+  const deleteClient = (id: number) => {
+    setClients(prevClient => {
+      Toast.show('Client deleted successfully.');
+      return prevClient.filter(client => client.id !== id);
+    });
+  };
+
+  const createClient = (client: clientType) => {
+    setClients([
+      ...clients,
+      {
+        id: Math.max(...clients.map(o => o.id), 0) + 1,
+        name: client.name,
+        email: client.email,
+      },
+    ]);
+  };
+
+  // const onCreateClient = () => {
+  //   navigation.navigate('ClientForm', {
+  //     onSubmit: (client: clientType) => {
+  //       createClient;
+  //       createClient(client);
+  //       navigation.navigate('ClientsList');
   //     },
-  //   ]);
+  //     onClose: () => {
+  //       navigation.navigate('ClientsList');
+  //     },
+  //   });
   // };
 
-  // useEffect(() => {
-  // }, []);
+  const updateClient = (client: clientType) => {
+    setClients(
+      clients.map(c => {
+        if (c.id === client.id) {
+          c.name = client.name;
+          c.email = client.email;
+        }
+
+        return c;
+      }),
+    );
+  };
 
   // return the Provider component wrapping the children prop and set the value property, so // when we use it we only need to pass the children prop
   return (
     <AppPermissionsContext.Provider
       value={{
         // updateClient,
-        // createClient,
         clients,
         loading,
+        deleteClient,
+        createClient,
+        updateClient,
       }}>
       {children}
     </AppPermissionsContext.Provider>

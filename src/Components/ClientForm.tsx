@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {StyleSheet, Text, View, Pressable} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import {useForm, SubmitHandler} from 'react-hook-form';
 import CustomInput from '../Components/Shared/CustomInput';
 
@@ -28,7 +28,6 @@ const ClientForm = ({route}) => {
   };
 
   useEffect(() => {
-    console.log('route', route);
     setValue('name', route.params.client?.name);
     setValue('email', route.params.client?.email);
   }, [route, setValue]);
@@ -59,7 +58,7 @@ const ClientForm = ({route}) => {
           },
         }}
       />
-      <Pressable
+      <TouchableOpacity
         onPress={handleSubmit2(onSubmit)}
         style={({pressed}) => [
           {
@@ -68,8 +67,8 @@ const ClientForm = ({route}) => {
           styles.buttonCreate,
         ]}>
         <Text>Save</Text>
-      </Pressable>
-      <Pressable
+      </TouchableOpacity>
+      <TouchableOpacity
         onPress={route.params.onClose}
         style={({pressed}) => [
           {
@@ -78,7 +77,7 @@ const ClientForm = ({route}) => {
           styles.buttonCreate,
         ]}>
         <Text>Close</Text>
-      </Pressable>
+      </TouchableOpacity>
     </View>
   );
 };
