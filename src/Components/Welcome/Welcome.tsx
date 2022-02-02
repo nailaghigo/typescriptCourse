@@ -1,5 +1,5 @@
 import React from 'react';
-import {TouchableOpacity, Text, View} from 'react-native';
+import {Pressable, Text, View} from 'react-native';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 
 // Check the any type bellow
@@ -9,9 +9,9 @@ const WelcomePage = ({navigation}: Props) => {
   return (
     <View>
       <Text>Welcome!</Text>
-      <TouchableOpacity onPress={() => navigation.navigate('LogIn')}>
+      <Pressable onPress={() => navigation.navigate('LogIn')}>
         <Text>Login</Text>
-      </TouchableOpacity>
+      </Pressable>
     </View>
   );
 };

@@ -1,5 +1,5 @@
 import React, {useContext} from 'react';
-import {StyleSheet, Text, View, FlatList, TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, View, FlatList, Pressable} from 'react-native';
 import {RootStackParamList} from '../../helper/clientType';
 import ListItem from '../../Components/Shared/ListItem';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
@@ -46,7 +46,7 @@ const ClientList: React.FC<Props> = ({navigation}) => {
         ListHeaderComponent={
           <View>
             <Text style={styles.title}>Clients</Text>
-            <TouchableOpacity
+            <Pressable
               onPress={onCreateClient}
               style={({pressed}) => [
                 {
@@ -55,7 +55,7 @@ const ClientList: React.FC<Props> = ({navigation}) => {
                 styles.buttonCreate,
               ]}>
               {() => <Text>Add New Client</Text>}
-            </TouchableOpacity>
+            </Pressable>
           </View>
         }
         keyExtractor={item => item.id.toString()}

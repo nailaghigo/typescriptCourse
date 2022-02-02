@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, Text, StyleSheet, Pressable} from 'react-native';
 
 interface Props {
   id: number;
@@ -24,7 +24,7 @@ const ListItem: React.FC<Props> = ({id, name, email, onUpdate, onDelete}) => {
         </Text>
       </View>
       <View style={styles.containerButtons}>
-        <TouchableOpacity
+        <Pressable
           onPress={() => onUpdate(id)}
           style={({pressed}) => [
             {
@@ -33,8 +33,8 @@ const ListItem: React.FC<Props> = ({id, name, email, onUpdate, onDelete}) => {
             styles.buttonUpdate,
           ]}>
           {() => <Text>Update</Text>}
-        </TouchableOpacity>
-        <TouchableOpacity
+        </Pressable>
+        <Pressable
           onPress={() => onDelete(id)}
           style={({pressed}) => [
             {
@@ -43,7 +43,7 @@ const ListItem: React.FC<Props> = ({id, name, email, onUpdate, onDelete}) => {
             styles.buttonDelete,
           ]}>
           {() => <Text>Delete</Text>}
-        </TouchableOpacity>
+        </Pressable>
       </View>
     </View>
   );

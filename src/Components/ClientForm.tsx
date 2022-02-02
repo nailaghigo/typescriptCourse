@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {StyleSheet, Text, View, Pressable} from 'react-native';
 import {useForm, SubmitHandler} from 'react-hook-form';
 import CustomInput from '../Components/Shared/CustomInput';
 
@@ -58,7 +58,7 @@ const ClientForm = ({route}) => {
           },
         }}
       />
-      <TouchableOpacity
+      <Pressable
         onPress={handleSubmit2(onSubmit)}
         style={({pressed}) => [
           {
@@ -67,8 +67,8 @@ const ClientForm = ({route}) => {
           styles.buttonCreate,
         ]}>
         <Text>Save</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
+      </Pressable>
+      <Pressable
         onPress={route.params.onClose}
         style={({pressed}) => [
           {
@@ -77,7 +77,7 @@ const ClientForm = ({route}) => {
           styles.buttonCreate,
         ]}>
         <Text>Close</Text>
-      </TouchableOpacity>
+      </Pressable>
     </View>
   );
 };

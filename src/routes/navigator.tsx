@@ -36,7 +36,11 @@ const Navigator = ({handleLogin, logged}: NavigatorProps) => {
               if (route.name === 'Home') {
                 return (
                   <Ionicons
-                    name={focused ? 'ion-ios-home' : 'ion-ios-home-outline'}
+                    name={
+                      focused
+                        ? 'ios-information-circle'
+                        : 'ios-information-circle-outline'
+                    }
                     size={size}
                     color={color}
                   />
@@ -56,6 +60,7 @@ const Navigator = ({handleLogin, logged}: NavigatorProps) => {
           })}>
           <Tab.Screen name="Home" component={HomePage} />
           <Tab.Screen name="Clients" component={ClientsStackScreen} />
+          {/* <Tab.Screen name="ClientForm" component={ClientForm} /> */}
         </Tab.Navigator>
       ) : (
         <Stack.Navigator>

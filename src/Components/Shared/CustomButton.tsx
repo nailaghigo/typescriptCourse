@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, StyleSheet, TouchableOpacity} from 'react-native';
+import {Text, StyleSheet, Pressable} from 'react-native';
 
 interface Props {
   onPress: any;
@@ -9,11 +9,11 @@ interface Props {
 }
 const CustomButton: React.FC<Props> = ({onPress, text, bgColor, fgColor}) => {
   return (
-    <TouchableOpacity
+    <Pressable
       onPress={onPress}
       style={[styles.container, bgColor ? {backgroundColor: bgColor} : {}]}>
       <Text style={[styles.text, fgColor ? {color: fgColor} : {}]}>{text}</Text>
-    </TouchableOpacity>
+    </Pressable>
   );
 };
 
