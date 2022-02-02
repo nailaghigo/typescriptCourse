@@ -31,7 +31,7 @@ const Navigator = ({handleLogin, logged}: NavigatorProps) => {
         <Stack.Screen
           name="ClientForm"
           component={ClientForm}
-          options={({route, navigation}) => ({
+          options={({navigation}) => ({
             headerLeft: () => (
               <TouchableOpacity
                 onPress={() => navigation.goBack(null)}
@@ -43,7 +43,6 @@ const Navigator = ({handleLogin, logged}: NavigatorProps) => {
               </TouchableOpacity>
             ),
             tabBarButton: () => null,
-            title: route.params?.client ? 'Edit Client' : 'Add New Client',
           })}
         />
       </Stack.Navigator>

@@ -9,12 +9,11 @@ export type RootStackParamList = {
   Home: undefined;
   Welcome: undefined;
   ClientsList: undefined;
-  ClientForm: {
-    clientId?: number;
+  ClientForm?: {
     // clients: clientType[];
     client?: clientType;
-    onSubmit: (client: clientType) => void;
-    onClose: () => void;
+    // onSubmit: (client: clientType) => void;
+    // onClose: () => void;
     // selectedClient: {
     //   id: number;
     //   name: string;

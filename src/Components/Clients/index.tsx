@@ -1,6 +1,6 @@
 import React, {useContext} from 'react';
 import {StyleSheet, Text, View, FlatList, Pressable} from 'react-native';
-import {RootStackParamList} from '../../helper/clientType';
+import clientType, {RootStackParamList} from '../../helper/clientType';
 import ListItem from '../../Components/Shared/ListItem';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {AppPermissionsContext} from '../../context';
@@ -11,25 +11,12 @@ const ClientList: React.FC<Props> = ({navigation}) => {
   const clientContextProvider = useContext(AppPermissionsContext);
 
   const onCreateClient = () => {
-    navigation.navigate('ClientForm', {
-      onSubmit: client => {
-        clientContextProvider?.createClient(client);
-        navigation.navigate('ClientsList');
-      },
-      onClose: () => {
-        navigation.navigate('ClientsList');
-      },
-    });
+    navigation.navigate('ClientForm');
   };
 
-  const onUpdateClient = (clientId: number) => {
+  const onUpdateClient = (client: clientType) => {
     navigation.navigate('ClientForm', {
-      clientId,
-      onSubmit: client => clientContextProvider?.updateClient(client),
-      client: clientContextProvider?.clients?.find(
-        c => c.id.toString() === clientId?.toString(),
-      ),
-      onClose: () => navigation.navigate('ClientsList'),
+      client,
     });
   };
 
@@ -60,13 +47,14 @@ const ClientList: React.FC<Props> = ({navigation}) => {
         keyExtractor={item => item.id.toString()}
         data={clientContextProvider?.clients}
         refreshing={clientContextProvider?.loading}
+        onRefresh={() => clientContextProvider?.getClients()}
         renderItem={({item}) => (
           <>
             <ListItem
               id={item.id}
               name={item.name}
               email={item.email}
-              onUpdate={() => onUpdateClient(item.id)}
+              onUpdate={() => onUpdateClient(item)}
               onDelete={() => onDeleteClient(item.id)}
             />
           </>

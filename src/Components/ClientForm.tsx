@@ -1,9 +1,10 @@
-import React, {useEffect} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {StyleSheet, Text, View, Pressable} from 'react-native';
 import {useForm, SubmitHandler} from 'react-hook-form';
 import CustomInput from '../Components/Shared/CustomInput';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../helper/clientType';
+import {AppPermissionsContext} from '../context';
 
 interface IFormInputs {
   id: number;
@@ -16,7 +17,9 @@ type Props = NativeStackScreenProps<RootStackParamList, 'ClientForm'>;
 const EMAIL_REGEX =
   /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
 
-const ClientForm = ({route}: Props) => {
+const ClientForm = ({route, navigation}: Props) => {
+  const clientContextProvider = useContext(AppPermissionsContext);
+
   const {
     control: control2,
     handleSubmit: handleSubmit2,
@@ -24,17 +27,27 @@ const ClientForm = ({route}: Props) => {
   } = useForm<IFormInputs>();
 
   const onSubmit: SubmitHandler<IFormInputs> = data => {
-    route?.params?.onSubmit({
-      ...route.params.client,
-      ...data,
-    });
-    route.params.onClose();
+    if (route?.params?.client) {
+      clientContextProvider?.updateClient({
+        ...route.params.client,
+        ...data,
+      });
+    } else {
+      clientContextProvider?.createClient(data);
+    }
+    navigation.goBack();
   };
 
   useEffect(() => {
-    setValue('name', route.params.client?.name || '');
-    setValue('email', route.params.client?.email || '');
+    setValue('name', route.params?.client?.name || '');
+    setValue('email', route.params?.client?.email || '');
   }, [route, setValue]);
+
+  useEffect(() => {
+    navigation.setOptions({
+      title: route.params?.client ? 'Edit Client' : 'Add New Client',
+    });
+  }, [navigation, route.params?.client]);
 
   return (
     <View>
@@ -73,7 +86,7 @@ const ClientForm = ({route}: Props) => {
         <Text>Save</Text>
       </Pressable>
       <Pressable
-        onPress={route.params.onClose}
+        onPress={() => navigation.goBack()}
         style={({pressed}) => [
           {
             backgroundColor: pressed ? '#EFA76B' : '#EB9960',
