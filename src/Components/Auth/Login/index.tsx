@@ -1,7 +1,5 @@
 import React from 'react';
-// import { useState } from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-
 import {useForm} from 'react-hook-form';
 import CustomButton from '../../../Components/Shared/CustomButton';
 import CustomInput from '../../../Components/Shared/CustomInput';
@@ -48,7 +46,6 @@ const LogIn = ({handleLogin}: LoginProps) => {
     }
     storeData(data);
     handleLogin();
-    // setLogged(true);
   };
 
   const storeData = async (value: Data) => {
@@ -56,7 +53,7 @@ const LogIn = ({handleLogin}: LoginProps) => {
       const jsonValue = JSON.stringify(value);
       await AsyncStorage.setItem('@storage_Key', jsonValue);
     } catch (e) {
-      // saving error
+      console.log(e);
     }
   };
 

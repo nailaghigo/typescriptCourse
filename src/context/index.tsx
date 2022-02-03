@@ -2,22 +2,9 @@ import React, {FC, useState, useEffect} from 'react';
 import {createContext} from 'react';
 import clientType, {iClientContext} from '../helper/clientType';
 import Toast from 'react-native-simple-toast';
+import fetch from 'cross-fetch';
 
 export const AppPermissionsContext = createContext<iClientContext | null>(null);
-
-// interface AppPermissions {
-//   updateClient: (client: clientType) => void;
-//   createClient: (client: clientType) => void;
-//   children: JSX.Element | JSX.Element[];
-// }
-
-/*export const AppPermissionsContext = React.createContext<
-  AppPermissions | undefined
->(undefined);
-// */
-// export type APIProviderProps = {
-//   children: JSX.Element | JSX.Element[];
-// };
 
 const ClientContextProvider: FC = ({children}) => {
   const [clients, setClients] = useState<clientType[]>([]);
@@ -26,7 +13,7 @@ const ClientContextProvider: FC = ({children}) => {
   const getClients = () => {
     setLoading(true);
     fetch('https://jsonplaceholder.typicode.com/users')
-      .then(response => response.json())
+      .then(async response => await response.json())
       .then(response => {
         setClients(response);
         setLoading(false);
@@ -58,19 +45,6 @@ const ClientContextProvider: FC = ({children}) => {
     ]);
   };
 
-  // const onCreateClient = () => {
-  //   navigation.navigate('ClientForm', {
-  //     onSubmit: (client: clientType) => {
-  //       createClient;
-  //       createClient(client);
-  //       navigation.navigate('ClientsList');
-  //     },
-  //     onClose: () => {
-  //       navigation.navigate('ClientsList');
-  //     },
-  //   });
-  // };
-
   const updateClient = (client: clientType) => {
     setClients(
       clients.map(c => {
@@ -78,17 +52,14 @@ const ClientContextProvider: FC = ({children}) => {
           c.name = client.name;
           c.email = client.email;
         }
-
         return c;
       }),
     );
   };
 
-  // return the Provider component wrapping the children prop and set the value property, so // when we use it we only need to pass the children prop
   return (
     <AppPermissionsContext.Provider
       value={{
-        // updateClient,
         clients,
         loading,
         getClients,

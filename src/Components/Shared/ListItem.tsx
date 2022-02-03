@@ -27,14 +27,16 @@ const ListItem: React.FC<Props> = ({id, name, email, onUpdate, onDelete}) => {
       <View style={styles.containerButtons}>
         <TouchableOpacity
           onPress={() => onUpdate(id)}
-          style={{alignItems: 'center'}}>
+          style={{alignItems: 'center'}}
+          testID="update-button">
           <View style={{alignItems: 'center', paddingLeft: 10}}>
             <AntDesign name="edit" size={20} />
           </View>
         </TouchableOpacity>
         <TouchableOpacity
           onPress={() => onDelete(id)}
-          style={{alignItems: 'center'}}>
+          style={{alignItems: 'center'}}
+          testID="delete-button">
           <View style={{alignItems: 'center', paddingLeft: 10}}>
             <AntDesign name="delete" size={20} />
           </View>

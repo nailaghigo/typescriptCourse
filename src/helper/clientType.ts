@@ -10,16 +10,7 @@ export type RootStackParamList = {
   Welcome: undefined;
   ClientsList: undefined;
   ClientForm?: {
-    // clients: clientType[];
     client?: clientType;
-    // onSubmit: (client: clientType) => void;
-    // onClose: () => void;
-    // selectedClient: {
-    //   id: number;
-    //   name: string;
-    //   email: string;
-    // };
-    // setClients: React.Dispatch<React.SetStateAction<clientType[]>>;
   };
 };
 export interface iClientContext {
