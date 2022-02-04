@@ -1,8 +1,10 @@
+/* eslint-disable react-native/no-inline-styles */
 import React from 'react';
 import ClientsList from '../Components/Clients';
 import HomePage from '../Components/HomePage/HomePage';
+import UserScreen from '../Components/User';
 import LogIn from '../Components/Auth/Login';
-import ClientForm from '../Components/ClientForm';
+import ClientForm from '../Components/Form/ClientForm';
 import WelcomePage from '../Components/Welcome/Welcome';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
@@ -71,13 +73,22 @@ const Navigator = ({handleLogin, logged}: NavigatorProps) => {
                     color={color}
                   />
                 );
+              } else if (route.name === 'User') {
+                return (
+                  <Ionicons
+                    name={focused ? 'person' : 'person-outline'}
+                    size={size}
+                    color={color}
+                  />
+                );
               }
             },
-            tabBarActiveTintColor: 'tomato',
+            tabBarActiveTintColor: '#EB9960',
             tabBarInactiveTintColor: 'gray',
           })}>
           <Tab.Screen name="Home" component={HomePage} />
           <Tab.Screen name="Clients" component={ClientsStackScreen} />
+          <Tab.Screen name="User" component={UserScreen} />
         </Tab.Navigator>
       ) : (
         <Stack.Navigator>

@@ -1,6 +1,6 @@
 import 'react-native';
 import React from 'react';
-import ListItem from '../src/Components/shared/ListItem';
+import ListItem from '../src/Components/Shared/ListItem/ListItem';
 import {fireEvent, render} from '@testing-library/react-native';
 
 const id = 3;

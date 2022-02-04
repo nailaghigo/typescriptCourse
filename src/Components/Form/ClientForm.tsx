@@ -1,10 +1,11 @@
 import React, {useContext, useEffect} from 'react';
-import {StyleSheet, Text, View, Pressable} from 'react-native';
+import {Text, View, Pressable} from 'react-native';
+import styles from './styles';
 import {useForm, SubmitHandler} from 'react-hook-form';
-import CustomInput from '../Components/Shared/CustomInput';
+import CustomInput from '../Shared/CustomInput/CustomInput';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {RootStackParamList} from '../helper/clientType';
-import {AppPermissionsContext} from '../context';
+import {RootStackParamList} from '../../helper/clientType';
+import {AppPermissionsContext} from '../../context';
 
 interface IFormInputs {
   id: number;
@@ -98,18 +99,5 @@ const ClientForm = ({route, navigation}: Props) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  // button create
-  buttonCreate: {
-    padding: 6,
-    color: '#ffffff',
-    borderRadius: 3,
-    margin: 5,
-    alignSelf: 'center',
-    alignItems: 'center',
-    width: '30%',
-  },
-});
 
 export default ClientForm;

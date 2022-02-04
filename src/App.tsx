@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {SafeAreaView, StyleSheet} from 'react-native';
 import FlipperAsyncStorage from 'rn-flipper-async-storage-advanced';
 import ClientContextProvider from './context';
 import Navigator from './routes/navigator';
+import {checkPermission, PERMISSION_TYPE} from './AppPermissions';
 
 const App = () => {
   const [logged, setLogged] = useState<boolean>(false);
@@ -10,6 +11,10 @@ const App = () => {
   const handleLogin = () => {
     setLogged(true);
   };
+
+  useEffect(() => {
+    checkPermission(PERMISSION_TYPE.camera);
+  }, []);
 
   return (
     <ClientContextProvider>

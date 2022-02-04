@@ -1,6 +1,6 @@
 import 'react-native';
 import React from 'react';
-import CustomButton from '../src/Components/Shared/CustomButton';
+import CustomButton from '../src/Components/Shared/CustomButton/CustomButton';
 import {render, waitFor} from '@testing-library/react-native';
 
 describe('CustomButton', () => {

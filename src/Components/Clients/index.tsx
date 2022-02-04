@@ -1,7 +1,8 @@
 import React, {useContext} from 'react';
-import {StyleSheet, Text, View, FlatList, Pressable} from 'react-native';
+import {Text, View, FlatList, Pressable} from 'react-native';
+import styles from './styles';
 import clientType, {RootStackParamList} from '../../helper/clientType';
-import ListItem from '../../Components/Shared/ListItem';
+import ListItem from '../Shared/ListItem/ListItem';
 import {NativeStackScreenProps} from '@react-navigation/native-stack';
 import {AppPermissionsContext} from '../../context';
 
@@ -63,52 +64,5 @@ const ClientList: React.FC<Props> = ({navigation}) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  safeArea: {
-    flex: 1,
-  },
-  container: {
-    alignItems: 'stretch',
-    flex: 1,
-  },
-  header: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 60,
-    backgroundColor: '#263544',
-  },
-  headerTitle: {
-    fontSize: 20,
-    color: '#EBF0C5',
-    fontWeight: '700',
-  },
-  title: {
-    margin: 10,
-    fontWeight: 'bold',
-    fontSize: 20,
-    alignSelf: 'center',
-    color: '#375062',
-  },
-  item: {
-    margin: 5,
-    padding: 10,
-    backgroundColor: '#EBF0C5',
-  },
-  itemData: {
-    fontSize: 15,
-    color: '#FFF',
-  },
-  // button create
-  buttonCreate: {
-    padding: 6,
-    color: '#ffffff',
-    borderRadius: 3,
-    margin: 5,
-    alignSelf: 'center',
-    alignItems: 'center',
-    width: '30%',
-  },
-});
 
 export default ClientList;

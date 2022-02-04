@@ -1,12 +1,16 @@
 import React from 'react';
-import {Text, View} from 'react-native';
+import {View, Text} from 'react-native';
+import styles from './style';
 
-const HomePage = () => {
+const Home = () => {
   return (
-    <View>
-      <Text>Home</Text>
+    <View style={styles.container}>
+      <View style={styles.header}>
+        <Text style={styles.title}>Welcome to</Text>
+        <Text style={styles.titleName}>Radium Med</Text>
+      </View>
     </View>
   );
 };
 
-export default HomePage;
+export default Home;

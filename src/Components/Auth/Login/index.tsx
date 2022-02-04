@@ -1,8 +1,9 @@
 import React from 'react';
-import {StyleSheet, Text, View} from 'react-native';
+import {Text, View} from 'react-native';
+import styles from '../../Auth/Login/styles';
 import {useForm} from 'react-hook-form';
-import CustomButton from '../../../Components/Shared/CustomButton';
-import CustomInput from '../../../Components/Shared/CustomInput';
+import CustomButton from '../../Shared/CustomButton/CustomButton';
+import CustomInput from '../../Shared/CustomInput/CustomInput';
 import Toast from 'react-native-simple-toast';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
@@ -12,8 +13,8 @@ interface Data {
 }
 
 const user1 = {
-  email: 'asd@test.com',
-  password: 'test1',
+  email: 'user@test.com',
+  password: 'test123',
 };
 
 const EMAIL_REGEX =
@@ -24,8 +25,6 @@ type LoginProps = {
 };
 
 const LogIn = ({handleLogin}: LoginProps) => {
-  // const [isLogged, setLogged] = useState(false);
-
   const {
     control,
     handleSubmit,
@@ -58,7 +57,7 @@ const LogIn = ({handleLogin}: LoginProps) => {
   };
 
   return (
-    <View>
+    <View style={styles.container}>
       <Text style={styles.title}>Log In</Text>
       <CustomInput
         name="email"
@@ -69,7 +68,10 @@ const LogIn = ({handleLogin}: LoginProps) => {
         secureTextEntry={false}
         rules={{
           required: 'Email is required',
-          pattern: {value: EMAIL_REGEX, message: 'Email is invalid'},
+          pattern: {
+            value: EMAIL_REGEX,
+            message: 'Email is invalid',
+          },
         }}
       />
       <CustomInput
@@ -90,15 +92,5 @@ const LogIn = ({handleLogin}: LoginProps) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  title: {
-    margin: 10,
-    fontWeight: 'bold',
-    fontSize: 20,
-    alignSelf: 'center',
-    color: '#375062',
-  },
-});
 
 export default LogIn;

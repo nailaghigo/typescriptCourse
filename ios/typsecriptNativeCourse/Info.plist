@@ -2,6 +2,10 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Let $(APP_DISPLAY_NAME) use your photos library.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Let $(APP_DISPLAY_NAME) use the camera to record your face.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Zocial.ttf</string>
